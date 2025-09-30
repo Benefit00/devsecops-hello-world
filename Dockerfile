@@ -7,7 +7,7 @@ COPY src ./src
 RUN mvn -q -e -B -DskipTests package
 
 # Runtime stage with distroless for minimal surface
-FROM gcr.io/distroless/java21@sha256:5b2660c6f2b6df6f7a5a1d3b70446eaf3e3f3a76b8f1e94952c7c5d2f1d17c77
+FROM gcr.io/distroless/java21@sha256:418b2e2a9e452aa9299511427f2ae404dfc910ecfa78feb53b1c60c22c3b640c
 WORKDIR /app
 COPY --from=builder /workspace/target/hello-world-1.0.0-jar-with-dependencies.jar /app/app.jar
 EXPOSE 8080
