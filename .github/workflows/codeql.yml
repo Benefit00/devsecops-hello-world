@@ -1,12 +1,8 @@
 name: CodeQL
-
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  schedule:
-    - cron: '0 3 * * 0'
+  push: { branches: [ "main" ] }
+  pull_request: { branches: [ "main" ] }
+  schedule: [ { cron: '0 3 * * 0' } ]
 
 permissions:
   security-events: write
@@ -14,11 +10,16 @@ permissions:
 
 jobs:
   analyze:
-    name: Analyze
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
       - uses: github/codeql-action/init@v3
         with:
           languages: java
+      - uses: github/codeql-action/autobuild@v3   # <-- this is the key bit
       - uses: github/codeql-action/analyze@v3
