@@ -49,7 +49,13 @@ terraform apply -auto-approve
 - Strict Content Security Policy (CSP) header set by the app.
 - Terraform uses the Docker provider to keep the demo runnable anywhere Docker runs.
 
-## Next Steps (optional)
+## Next Steps
 - Switch to a managed registry (GHCR/ECR) + OIDC for auth.
 - Add DAST (ZAP Baseline) against the running container in CI.
 - Add SLSA provenance via GitHub's `generate-provenance`.
+
+## Bugs and Improvements
+
+- Report bugs or suggest improvements at the following benefittechnolgies@gmail.com
+
+
