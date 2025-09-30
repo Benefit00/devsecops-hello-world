@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  security-events: write
+  id-token: write
+
+jobs:
+  build-test-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Verify (unit tests + spotbugs)
+        run: mvn -B -e -DskipTests=false verify
+
+      - name: Build container image
+        run: |
+          docker build -t devsecops-hello:${{ github.sha }} .
+
+      - name: Trivy scan (image)
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: devsecops-hello:${{ github.sha }}
+          format: 'table'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+      - name: tfsec (Terraform static analysis)
+        uses: aquasecurity/tfsec-action@v1.0.3
+        with:
+          working_directory: ./terraform
+          full_repo_scan: true
+
+  dependency-review:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/dependency-review-action@v4
+        with:
+          comment-summary-in-pr: true
+          fail-on-severity: high

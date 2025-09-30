@@ -1,0 +1,20 @@
+# Maven
+target/
+.settings/
+.classpath
+.project
+
+# VS Code
+.vscode/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Java
+*.class
+
+# OS
+.DS_Store
