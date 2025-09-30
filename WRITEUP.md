@@ -28,3 +28,4 @@
 - Replace Docker provider with modules for ECS/EKS/AKS once cloud creds are available.
 - Add OPA/Conftest policies for Terraform plan gating.
 - Add DAST (ZAP Baseline) and SBOM (Syft) with signed attestations.
+- protection smoke test
