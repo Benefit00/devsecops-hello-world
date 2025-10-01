@@ -56,6 +56,6 @@ terraform apply -auto-approve
 
 ## Bugs and Improvements
 
-- Report bugs or suggest improvements at the following benefittechnolgies@gmail.com
+- Report bugs or suggest improvements email: bugs@exampleCompamny.org
 
 

@@ -1,6 +1,6 @@
 # Security Policy
 
-- **Reporting:** Please report vulnerabilities privately via security@your-org.example. Do not open public issues.
+- **Reporting:** Please report vulnerabilities privately via security@exampleCompany.org. Do not open public issues.
 - **Supported branches:** Only `main` receives security updates.
 - **Dependencies:** Automated via Dependabot with security updates enabled.
 - **Build pipeline:** CodeQL, Dependency Review, Trivy (containers), and tfsec (Terraform).
