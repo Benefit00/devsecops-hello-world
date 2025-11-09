@@ -46,10 +46,9 @@ jobs:
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
           working_directory: ./terraform
-          full_repo_scan: true
 
   dependency-review:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && github.repository_visibility == 'public'
     runs-on: ubuntu-latest
     permissions:
       contents: read
